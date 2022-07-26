@@ -13,43 +13,61 @@ class Shop {
     this.items = items;
   }
   updateQuality() { // needs substantial refactoring
-    this.items.forEach((item) =>  {
+    this.items.map((item) =>  {
       switch(item.name) {
         case "Aged Brie":
-          item.quality += 1;
-          if (item.sellIn <= 0) {item.quality += 1}
-          if (item.quality > 50) { item.quality = 50;}
+          item = this.#changeQualityAgedBrie(item);
           item.sellIn -=  1;
           break;
         case "Backstage passes to a TAFKAL80ETC concert":
-          item.quality += 1;
-          if (item.sellIn < 11) { // 1 extra if sellIn < 11
-            item.quality += 1;
-          }
-          if (item.sellIn < 6) { // 1 more extra if sellIn < 6
-            item.quality += 1;
-          }
-          if (item.quality > 50) {item.quality = 50; } // set maximum quality to be 50
-          if (item.sellIn < 0) {item.quality = 0; } // if sellIn < 0, quality = 0
+          item = this.#changeQualityBackstagePasses(item);
           item.sellIn -=  1;
           break;
         case "Sulfuras, Hand of Ragnaros":
           break;
         case "Conjured Mana Cake":
-          item.quality -= 2
-          if (item.sellIn < 0) { item.quality -= 2; }
-          if (item.quality < 0) { item.quality = 0; }
-          item.sellIn -=  1;
+          item = this.#changeConjuredItem(item);
           break;
         default:
-          item.quality -= 1
-          if (item.sellIn < 0) { item.quality -= 1; }
-          if (item.quality < 0) { item.quality = 0; }
-          item.sellIn -=  1;
+          item = this.#changeDefaultItem(item);
           break;
       }
     })
     return this.items;
+  }
+
+  // private functions
+  #changeQualityAgedBrie(item) {
+    item.quality += 1;
+    if (item.sellIn <= 0) {item.quality += 1}
+    if (item.quality > 50) { item.quality = 50;}
+    return item;
+  }
+  #changeQualityBackstagePasses(item) {
+    item.quality += 1;
+    if (item.sellIn < 11) { // 1 extra if sellIn < 11
+      item.quality += 1;
+    }
+    if (item.sellIn < 6) { // 1 more extra if sellIn < 6
+      item.quality += 1;
+    }
+    if (item.quality > 50) {item.quality = 50; } // set maximum quality to be 50
+    if (item.sellIn < 0) {item.quality = 0; } // if sellIn < 0, quality = 0
+    return item;
+  }
+  #changeConjuredItem(item) {
+    item.quality -= 2
+    if (item.sellIn < 0) { item.quality -= 2; }
+    if (item.quality < 0) { item.quality = 0; }
+    item.sellIn -=  1;
+    return item;
+  }
+  #changeDefaultItem(item) {
+    item.quality -= 1
+    if (item.sellIn < 0) { item.quality -= 1; }
+    if (item.quality < 0) { item.quality = 0; }
+    item.sellIn -=  1;
+    return item
   }
 }
 
