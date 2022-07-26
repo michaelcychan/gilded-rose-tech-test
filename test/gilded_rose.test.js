@@ -131,11 +131,20 @@ describe("Gilded Rose", function() {
     });
   });
   describe("New Conjured items", () => {
-    it("calculates Conjured Mana Cakes data after one day correctly", () => {
+    it("calculates Conjured Mana Cakes data after 1 day correctly", () => {
       const gildedRose = new Shop([new Item("Conjured Mana Cake", 3, 6)]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(2);
       expect(items[0].quality).toBe(4);
-    })
+    });
+    it("calculates Conjured Mana Cakes data after 10 days correctly", () => {
+      const gildedRose = new Shop([new Item("Conjured Mana Cake", 3, 6)]);
+      for (let i = 1; i < 10; i++ ) {
+        gildedRose.updateQuality();
+      }
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(-7);
+      expect(items[0].quality).toBe(0);
+    });
   })
 });
