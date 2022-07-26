@@ -73,5 +73,8 @@ switch(item.name) {
 ```
 Any new addition can be added as a new case. If amendment of current logic is also easier as they are more readable.
 
+### Separate functions for quality change
+Separate private functions were set up to handle quality changes as different items have different rules. New rules can be added easily, while new items with the same rules can use the existing rules.
+
 ## Further Issues
-Currently there is only "conjured" item, if there is another new "conjured" item and the quality change is same as the Conjured Mana Cake, the program will not work again. Further work can be done to match if the item name starts with the string "Conjured". However, as it is not known if the next item would contain a fixed keyword, it is better to amend the code when more information is available.
+Currently there is only "conjured" item, if there is another new "conjured" item and the quality change is same as the Conjured Mana Cake, the program would use the default rule to handle this. Further work can be done to match if the item name starts with the string "Conjured". However, as it is not known if the next item would contain a fixed keyword, it is better to amend the code when more information is available.

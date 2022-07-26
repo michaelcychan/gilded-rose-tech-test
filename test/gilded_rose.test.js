@@ -109,7 +109,7 @@ describe("Gilded Rose", function() {
       }
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(5);
-      expect(items[0].quality).toBe(35);
+      expect(items[0].quality).toBe(37);
     });
     it("calculates Backstage passes to a TAFKAL80ETC concert (case 2) correctly", () => {
       const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49)]);

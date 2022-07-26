@@ -17,18 +17,20 @@ class Shop {
       switch(item.name) {
         case "Aged Brie":
           item = this.#changeQualityAgedBrie(item);
-          item.sellIn -=  1;
+          item.sellIn = this.#changeSellIn(item.sellIn);
           break;
         case "Backstage passes to a TAFKAL80ETC concert":
+          item.sellIn = this.#changeSellIn(item.sellIn);  
           item = this.#changeQualityBackstagePasses(item);
-          item.sellIn -=  1;
           break;
         case "Sulfuras, Hand of Ragnaros":
           break;
         case "Conjured Mana Cake":
+          item.sellIn = this.#changeSellIn(item.sellIn);
           item = this.#changeConjuredItem(item);
           break;
         default:
+          item.sellIn = this.#changeSellIn(item.sellIn);
           item = this.#changeDefaultItem(item);
           break;
       }
@@ -37,9 +39,12 @@ class Shop {
   }
 
   // private functions
+  #changeSellIn(sellIn) {
+    return sellIn -= 1;
+  }
   #changeQualityAgedBrie(item) {
     item.quality += 1;
-    if (item.sellIn <= 0) {item.quality += 1}
+    if (item.sellIn <= 0) {item.quality += 1; }
     if (item.quality > 50) { item.quality = 50;}
     return item;
   }
@@ -59,15 +64,13 @@ class Shop {
     item.quality -= 2
     if (item.sellIn < 0) { item.quality -= 2; }
     if (item.quality < 0) { item.quality = 0; }
-    item.sellIn -=  1;
     return item;
   }
   #changeDefaultItem(item) {
     item.quality -= 1
     if (item.sellIn < 0) { item.quality -= 1; }
     if (item.quality < 0) { item.quality = 0; }
-    item.sellIn -=  1;
-    return item
+    return item;
   }
 }
 
